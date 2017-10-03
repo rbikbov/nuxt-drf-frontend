@@ -19,13 +19,15 @@
 </template>
 
 <script>
+import { emailVerify } from '~/api/auth'; // eslint-disable-line 
+
 export default {
-  name: 'auth-verify-email',
+  name: 'auth-registration-confirm-email',
   middleware: 'no-auth',
   async asyncData({ app, params }) {
     let status;
     try {
-      await app.$axios.post('/auth/registration/verify-email/', params);
+      await app.$axios(emailVerify(params));
       status = 'success';
     } catch (error) {
       status = 'fail';

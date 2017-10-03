@@ -50,6 +50,7 @@
 
 <script>
 import getProperty from '~/utils/getProperty'; // eslint-disable-line
+import { checkExist } from '~/api/auth'; // eslint-disable-line 
 
 export default {
   props: ['redirect'],
@@ -93,7 +94,7 @@ export default {
   created() {
     this.$validator.extend('unique', {
       validate: async (input, field) => {
-        const data = await this.$axios.get('/auth/check/', { params: { [field]: input } });
+        const { data } = await this.$axios(checkExist({ [field]: input }));
         return data.valid || { data };
       },
       getMessage: (field, params, { message }) => message

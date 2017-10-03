@@ -104,6 +104,7 @@
 
 <script>
 import getProperty from '~/utils/getProperty'; // eslint-disable-line
+import { checkExist } from '~/api/auth'; // eslint-disable-line 
 
 export default {
   props: ['redirect', 'user'],
@@ -163,7 +164,7 @@ export default {
         if (input === this.user[field]) {
           return true;
         }
-        const data = await this.$axios.$get('/auth/check', { params: { [field]: input } })
+        const { data } = await this.$axios(checkExist({ [field]: input }));
         return data.valid || { data };
       },
       getMessage: (field, params, { message }) => message

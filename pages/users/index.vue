@@ -84,17 +84,17 @@ export default {
     },
     filteredUsers() {
       return this.$store.getters['users/toArray']()
-        .filter(({ username, email, first_name }) =>
-          username.includes(this.searchText) ||
-          email.includes(this.searchText) ||
-          first_name.includes(this.searchText));
+        .filter(({ username, email, first_name, last_name }) =>
+          this.checkSearchString(username, email, first_name, last_name));
     },
   },
   methods: {
+    checkSearchString(...fieldValues) {
+      return fieldValues.some(val => val.toLowerCase().includes(this.searchText.toLowerCase()));
+    },
     onScroll() {
       const { scrollHeight, scrollTop, clientHeight } = document.documentElement;
       const scrollEnd = scrollHeight - scrollTop < clientHeight + 5; // 5px to page end
-      global.console.log(scrollEnd);
       if (!scrollEnd) return;
       this.moreUsers();
     },

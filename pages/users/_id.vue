@@ -89,18 +89,12 @@
 </template>
 
 <script>
-// import UserEditForm from '~/components/auth/UserEditForm.vue';
-
 export default {
   name: 'users',
   middleware: 'auth',
-  // components: { UserEditForm },
-  data: () => ({
-    showForm: false,
-  }),
   async fetch({ params, error, store }) {
     try {
-      await store.dispatch('users/fetchUsers', { id: params.id });
+      await store.dispatch('users/fetchUser', { id: params.id });
     } catch ({ response: { status, statusText, data } }) {
       error({ status, statusText, data });
     }
@@ -109,9 +103,6 @@ export default {
     user() {
       return this.$store.getters['users/byId'](this.$route.params.id);
     },
-    // authUser() {
-    //   return this.$store.getters['auth/user'];
-    // }
   }
 }
 </script>
