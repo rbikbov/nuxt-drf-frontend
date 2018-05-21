@@ -4,6 +4,10 @@
   "description": "Nuxt.js project",
   "author": "RafiZz <dribblerafis@gmail.com>",
   "private": true,
+  "engines": {
+    "node": "8.5.0",
+    "npm": "5.4.2"
+  },
   "scripts": {
     "dev": "nuxt",
     "build": "nuxt build",
@@ -13,12 +17,17 @@
     "precommit": "npm run lint"
   },
   "dependencies": {
-    "@nuxtjs/auth": "^2.0.5",
-    "nuxt": "^1.0.0-rc8",
-    "stylus": "^0.54.5",
-    "stylus-loader": "^3.0.1",
-    "vee-validate": "^2.0.0-rc.16",
-    "vuetify": "^0.15.7"
+    "axios": "0.16.2",
+    "chalk": "2.1.0",
+    "cookie": "0.3.1",
+    "debug": "3.0.1",
+    "js-cookie": "2.1.4",
+    "nuxt": "1.0.0-rc8",
+    "stylus": "0.54.5",
+    "stylus-loader": "3.0.1",
+    "vee-validate": "2.0.0-rc.16",
+    "vuetify": "0.15.7",
+    "whatwg-url": "6.1.0"
   },
   "devDependencies": {
     "babel-eslint": "^7.2.3",

@@ -68,7 +68,7 @@ export default {
   middleware: 'auth',
   data: () => ({
     searchText: '',
-    loading: false,
+    loading: false
   }),
   async fetch({ store, error }) {
     if (store.state.users.results.length) return;
@@ -83,17 +83,23 @@ export default {
       return this.$store.state.users;
     },
     filteredUsers() {
-      return this.$store.getters['users/toArray']()
-        .filter(({ username, email, first_name, last_name }) =>
-          this.checkSearchString(username, email, first_name, last_name));
-    },
+      return this.$store.getters['users/toArray']().filter((
+        { username, email, first_name, last_name } // eslint-disable-line camelcase
+      ) => this.checkSearchString(username, email, first_name, last_name));
+    }
   },
   methods: {
     checkSearchString(...fieldValues) {
-      return fieldValues.some(val => val.toLowerCase().includes(this.searchText.toLowerCase()));
+      return fieldValues.some(val =>
+        val.toLowerCase().includes(this.searchText.toLowerCase())
+      );
     },
     onScroll() {
-      const { scrollHeight, scrollTop, clientHeight } = document.documentElement;
+      const {
+        scrollHeight,
+        scrollTop,
+        clientHeight
+      } = document.documentElement;
       const scrollEnd = scrollHeight - scrollTop < clientHeight + 5; // 5px to page end
       if (!scrollEnd) return;
       this.moreUsers();
@@ -101,7 +107,9 @@ export default {
     async moreUsers() {
       if (!this.users.next || this.loading) return;
       this.loading = true;
-      await this.$store.dispatch('users/fetchUsers', { endpoint: this.users.next });
+      await this.$store.dispatch('users/fetchUsers', {
+        endpoint: this.users.next
+      });
       this.loading = false;
     },
     async searchUsers() {
@@ -111,8 +119,8 @@ export default {
         const params = this.searchText ? { search: this.searchText } : '';
         await this.$store.dispatch('users/fetchUsers', { params });
         this.loading = false;
-      }, 1000)
-    },
-  },
-}
+      }, 1000);
+    }
+  }
+};
 </script>
